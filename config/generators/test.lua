@@ -4,7 +4,7 @@
 --- DateTime: 8/24/19 10:10 PM
 ---
 
-after = {"common", "regions"}
+after = { "common", "regions" }
 
 -- Anything after -- are comments, and will be ignored when the config is loaded
 -- Anywhere that a string (text in quotes) is used, you can put any other sort of generator
@@ -23,7 +23,7 @@ config["examples"] = { -- the config value itself is a SuperGenerator in this ca
     },
     list = {
         "List value 1",
-        2,
+        "List value 2",
         "List value 3",
     },
     weighted = { -- Generator that chooses from list based on rarity
@@ -34,9 +34,10 @@ config["examples"] = { -- the config value itself is a SuperGenerator in this ca
         { "Very rare value", VERY_RARE },
         { "Extremely rare value", EXTREMELY_RARE },
     },
-    reused_generator = "gen tcpgen", -- Strings that start with "gen " reuse generators defined before this config was loaded
+    reused_generator = "gen tcp", -- Strings that start with "gen " reuse generators defined before this config was loaded
     empty = "", -- Empty strings mean to not set the field, use in lists or weighted generators to make them optional
-    lua_function = function() -- custom generator defined in lua, can return multiple fields the same way as a super generator, but the fields have to be strings, numbers or booleans
+    lua_function = function()
+        -- custom generator defined in lua, can return multiple fields the same way as a super generator, but the fields have to be strings, numbers or booleans
         return {
             id = random(1, 20),
             elf = "Elf" .. "Secrets"
@@ -48,11 +49,11 @@ config["examples"] = { -- the config value itself is a SuperGenerator in this ca
 config["maybe hair"] = {
     prefix = true,
     hair = {
-        {{
-             length = "gen hair length",
-             style = "gen hair style",
-         }, COMMON},
-        {"", COMMON}
+        { {
+              length = "gen hair length",
+              style = "gen hair style",
+          }, COMMON },
+        { "", COMMON }
     }
 }
 
@@ -81,3 +82,39 @@ head_casing = {
 }
 config["head casing"] = head_casing
 
+config["post_gen test"] = {
+    generators = {
+        hair = {
+            color = {
+                "bus seat pattern",
+                "translucent green",
+                "orange"
+            }
+        },
+        tcp = "gen tcp"
+    },
+    "gen karacel",
+    {
+        species = "karacel",
+        height = "towering",
+        ["hair length"] = "floor-length",
+        ["hair style"] = "gen hair style"
+    },
+    {
+        prefix = true,
+        tail2 = {
+            length = "short",
+            type = "faux"
+        }
+    },
+    function()
+        local changes = {}
+        if o["hair length"] ~= "no" then
+            changes["hair"] = "gen hair"
+        end
+        if o["species"] == "karacel" then
+            changes["friend"] = "gen tcp"
+        end
+        return changes
+    end
+}

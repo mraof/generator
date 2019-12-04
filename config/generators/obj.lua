@@ -106,7 +106,7 @@ config["obj"] = {
             {{
                  shape = "gen eye shape",
                  color = {
-                     {"light pink",COMMON}, {"pink",COMMON}, {"dark pink",COMMON}, {"light red",COMMON}, {"red",COMMON}, {"dark red",COMMON}, {"orange",COMMON}, {"light orange",COMMON}, {"dark orange",COMMON}, {"yellow",COMMON}, {"light yellow",COMMON}, {"dark yellow",COMMON}, {"light chartreuse",COMMON}, {"chartreuse",COMMON}, {"dark chartreuse",COMMON}, {"green",COMMON}, {"light green",COMMON}, {"dark green",COMMON}, {"blue",COMMON}, {"light blue",COMMON}, {"dark blue",COMMON}, {"light indigo",COMMON}, {"indigo",COMMON}, {"dark indigo",COMMON}, {"purple",COMMON}, {"light purple",COMMON}, {"dark purple",COMMON}, {"horror black",EXTREMELY_RARE}, {"pure white ",VERY_RARE}, {"white",COMMON}, {"light gray",COMMON}, {"mid-light gray",COMMON}, {"gray",COMMON}, {"mid-dark gray",COMMON}, {"dark gray",COMMON}, {"black",COMMON}, {"tan",COMMON}, {"dark tan",COMMON}, {"light tan",COMMON}, {"light brown",COMMON}, {"dark brown",COMMON}, {"brown",COMMON}
+                     {"light pink",COMMON}, {"pink",COMMON}, {"dark pink",COMMON}, {"light red",COMMON}, {"red",COMMON}, {"dark red",COMMON}, {"orange",COMMON}, {"light orange",COMMON}, {"dark orange",COMMON}, {"yellow",COMMON}, {"light yellow",COMMON}, {"dark yellow",COMMON}, {"light chartreuse",COMMON}, {"chartreuse",COMMON}, {"dark chartreuse",COMMON}, {"green",COMMON}, {"light green",COMMON}, {"dark green",COMMON}, {"blue",COMMON}, {"light blue",COMMON}, {"dark blue",COMMON}, {"light indigo",COMMON}, {"indigo",COMMON}, {"dark indigo",COMMON}, {"purple",COMMON}, {"light purple",COMMON}, {"dark purple",COMMON}, {"horror black",EXTREMELY_RARE}, {"pure white",VERY_RARE}, {"white",COMMON}, {"light gray",COMMON}, {"mid-light gray",COMMON}, {"gray",COMMON}, {"mid-dark gray",COMMON}, {"dark gray",COMMON}, {"black",COMMON}, {"tan",COMMON}, {"dark tan",COMMON}, {"light tan",COMMON}, {"light brown",COMMON}, {"dark brown",COMMON}, {"brown",COMMON}
                  }
              }, EXTREMELY_RARE},
             {"", COMMON}
@@ -137,7 +137,7 @@ config["obj"] = {
         },
         height = "gen height",
         teeth = {
-            {"jack o lantern ", COMMON}, {"wavy",UNCOMMON}, {"square",UNCOMMON}, {"bumpy",UNCOMMON}, {"stretchy",VERY_RARE}, {"straight line",RARE}
+            {"jack o lantern", COMMON}, {"wavy",UNCOMMON}, {"square",UNCOMMON}, {"bumpy",UNCOMMON}, {"stretchy",VERY_RARE}, {"straight line",RARE}
         },
         tongue = {
             {"slime", COMMON}, {"long slime",UNCOMMON}, {"pointed slime",UNCOMMON}, {"forked slime",RARE}
@@ -182,7 +182,7 @@ config["obj"] = {
         feet = "OBJ",
         fur_skin = {
             color = {
-                {"light pink",COMMON}, {"pink",COMMON}, {"dark pink",COMMON}, {"light red",COMMON}, {"red",COMMON}, {"dark red",COMMON}, {"orange",COMMON}, {"light orange",COMMON}, {"dark orange",COMMON}, {"yellow",COMMON}, {"light yellow",COMMON}, {"dark yellow",COMMON}, {"light chartreuse",COMMON}, {"chartreuse",COMMON}, {"dark chartreuse",COMMON}, {"green",COMMON}, {"light green",COMMON}, {"dark green",COMMON}, {"blue",COMMON}, {"light blue",COMMON}, {"dark blue",COMMON}, {"light indigo",COMMON}, {"indigo",COMMON}, {"dark indigo",COMMON}, {"purple",COMMON}, {"light purple",COMMON}, {"dark purple",COMMON}, {"horror black",EXTREMELY_RARE}, {"pure white ",VERY_RARE}, {"white",COMMON}, {"light gray",COMMON}, {"mid-light gray",COMMON}, {"gray",COMMON}, {"mid-dark gray",COMMON}, {"dark gray",COMMON}, {"black",COMMON}, {"tan",COMMON}, {"dark tan",COMMON}, {"light tan",COMMON}, {"light brown",COMMON}, {"dark brown",COMMON}, {"brown",COMMON}
+                {"light pink",COMMON}, {"pink",COMMON}, {"dark pink",COMMON}, {"light red",COMMON}, {"red",COMMON}, {"dark red",COMMON}, {"orange",COMMON}, {"light orange",COMMON}, {"dark orange",COMMON}, {"yellow",COMMON}, {"light yellow",COMMON}, {"dark yellow",COMMON}, {"light chartreuse",COMMON}, {"chartreuse",COMMON}, {"dark chartreuse",COMMON}, {"green",COMMON}, {"light green",COMMON}, {"dark green",COMMON}, {"blue",COMMON}, {"light blue",COMMON}, {"dark blue",COMMON}, {"light indigo",COMMON}, {"indigo",COMMON}, {"dark indigo",COMMON}, {"purple",COMMON}, {"light purple",COMMON}, {"dark purple",COMMON}, {"horror black",EXTREMELY_RARE}, {"pure white",VERY_RARE}, {"white",COMMON}, {"light gray",COMMON}, {"mid-light gray",COMMON}, {"gray",COMMON}, {"mid-dark gray",COMMON}, {"dark gray",COMMON}, {"black",COMMON}, {"tan",COMMON}, {"dark tan",COMMON}, {"light tan",COMMON}, {"light brown",COMMON}, {"dark brown",COMMON}, {"brown",COMMON}
             },
             type = {
                 {"moist skin", COMMON},
@@ -450,17 +450,17 @@ config["obj"] = {
                         {"bush", COMMON},
                         {"wood", COMMON},
                         {"fungus", COMMON},
-                        {"flesh ", RARE},
+                        {"flesh", RARE},
                         {"maw", VERY_RARE},
                         {"teeth", VERY_RARE},
-                        {"fur ", UNCOMMON},
+                        {"fur", UNCOMMON},
                         {"plant", COMMON},
-                        {"food ", RARE},
+                        {"food", RARE},
                         {"slime", COMMON},
                         {"crystal", COMMON},
                         {"toxic crystal", COMMON},
-                        {"another person’s head ", VERY_RARE},
-                        {"taxidermy ", RARE},
+                        {"another person’s head", VERY_RARE},
+                        {"taxidermy", RARE},
                         {"liquid", COMMON},
                         {"river", COMMON},
                         {"water", COMMON},
@@ -488,9 +488,9 @@ config["obj"] = {
                         {"sticker", COMMON},
                         {"cloud", COMMON},
                         {"nested", COMMON},
-                        {"horror ", EXTREMELY_RARE},
-                        {"scrap ", EXTREMELY_RARE},
-                        {"shred ", EXTREMELY_RARE},
+                        {"horror", EXTREMELY_RARE},
+                        {"scrap", EXTREMELY_RARE},
+                        {"shred", EXTREMELY_RARE},
                         {"masked", COMMON},
                         {"costumed", COMMON},
                         {"weather/space", COMMON},

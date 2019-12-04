@@ -11,3 +11,4 @@ rand = "0.7.0"
 rlua = "0.16.3"
 regex = "1"
 tcpgen = {git = "https://github.com/mraof/tcpgen"}
+Inflector = "*"
