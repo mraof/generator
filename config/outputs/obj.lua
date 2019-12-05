@@ -1,16 +1,3 @@
-function sizes(size, length)
-    if size == "average" and length == "average" then
-        return "average"
-    end
-    if size == "average" then
-        return length
-    end
-    if length == "average" then
-        return size
-    end
-    return size .. " " .. length
-end
-
 output = "This obj...\n"
         .. "-has a " .. o["head_casing"] .. " head casing\n"
 

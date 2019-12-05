@@ -14,7 +14,7 @@ config["hair style"] = {
     { "straight", COMMON }, { "curly", COMMON }, { "fluffy", COMMON }, { "wavy", COMMON }, { "angular", UNCOMMON }, { "wispy", COMMON }, { "swirly", UNCOMMON }, { "spiked", UNCOMMON }, { "frizzy", COMMON }, { "braided", UNCOMMON }, { "tied back", UNCOMMON }, { "in a bun", UNCOMMON }, { "pigtailed", UNCOMMON }, { "styled", UNCOMMON }
 }
 config["eye shape"] = {
-    { "round", COMMON }, { "pointed", COMMON }, { "almond-shaped", COMMON }, { "droopy", COMMON }, { "slit", UNCOMMON }
+    { "round", COMMON }, { "pointed", COMMON }, { "almond-shaped", COMMON }, { "droopy", COMMON }
 }
 config["teeth color"] = {
     { "white", COMMON }

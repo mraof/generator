@@ -468,7 +468,8 @@ impl OutputHandler {
         }
         let source = {
             let mut source = format!("function {}(o)\n", filename);
-            let _ = File::open(format!("{}/outputs/{}.lua", self.path, filename)).unwrap().read_to_string(&mut source).unwrap();
+            File::open(format!("{}/scripts/output_header.lua", self.path)).unwrap().read_to_string(&mut source).unwrap();
+            File::open(format!("{}/outputs/{}.lua", self.path, filename)).unwrap().read_to_string(&mut source).unwrap();
             source += "\nend";
             source
         };

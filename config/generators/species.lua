@@ -1,4 +1,4 @@
-after = { "beatfox", "aerosoul", "obj", "karacel", "pockitt", "snuglin", "regions", "genders" }
+after = { "beatfox", "demoneres", "aerosoul", "obj", "karacel", "pockitt", "snuglin", "regions", "genders" }
 
 local obj_regions = {
     {{
@@ -29,6 +29,11 @@ local karacel_regions = {
     {"gen regions", RARE}
 }
 
+local snuglin_regions = {
+    {"gen taverne", COMMON},
+    {"gen regions", RARE}
+}
+
 local pockitt_regions = {
     {"gen taverne", COMMON},
     {"gen regions", RARE}
@@ -51,6 +56,10 @@ config["species"] = {
     {
         species = "tcp",
         generator = "gen tcp"
+    },
+    {
+        species = "snuglin",
+        generator = "gen snuglin"
     },
     {
         species = "beatfox",
@@ -91,6 +100,11 @@ config["character"] = {
         species = "karacel",
         region = karacel_regions,
         generator = "gen karacel"
+    },
+    {
+        species = "snuglin",
+        region = snuglin_regions,
+        generator = "gen snuglin"
     },
     {
         species = "pockitt",

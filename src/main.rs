@@ -35,7 +35,7 @@ fn main() {
     };
 
     for _ in 0..100 {
-        let generator = generators.get("snuglin").unwrap();
+        let generator = generators.get("character").unwrap();
         let mut generated = generator.generate(&mut rng);
 /*
         for (key, value) in generated.iter()
@@ -44,7 +44,7 @@ fn main() {
         }
 */
         generated.append(&mut tcp_types.clone());
-        println!("{}", outputs.format("snuglin", generated));
+        println!("{}", outputs.format("character", generated));
     }
 }
 
