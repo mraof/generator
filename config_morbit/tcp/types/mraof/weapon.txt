@@ -1,0 +1,5 @@
+#weapon
+dice
+branding iron
+flyswatter
+wire

@@ -1,0 +1,26 @@
+#nature
+mountain
+ocean
+magma
+dust
+rock
+acid
+meteor
+moon
+glass
+jewel
+lilac
+hurricane
+earthquake
+blizzard
+tsunami
+drought
+drizzle
+rain
+acid rain
+rafflesia
+smog
+whirlpool
+sunset
+volcano
+solar eclipse

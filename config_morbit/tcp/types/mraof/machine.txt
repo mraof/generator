@@ -1,0 +1,4 @@
+#machine
+centrifuge
+compressor
+oven

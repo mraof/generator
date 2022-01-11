@@ -1,0 +1,11 @@
+#body
+joint
+tail
+fur
+mitosis
+decay
+hunger
+growth
+humor
+amalgam
+hypochondria

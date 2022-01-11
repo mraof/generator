@@ -1,0 +1,26 @@
+#food
+candy
+#storage
+cauldron
+coffin
+piñata
+#creature
+cerberus
+monster
+necromancer
+magician
+clown
+witch
+vampire
+werewolf
+zombie
+costume
+#abstract
+halloween
+horror
+#body
+gore
+maw
+skeleton
+#nature
+jack o' lantern

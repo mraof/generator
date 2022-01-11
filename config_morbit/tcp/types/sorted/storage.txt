@@ -1,0 +1,21 @@
+#storage
+tent
+merchant
+basket
+box
+crate
+cabinet
+hospital
+store
+skull
+water cooler
+keg
+bottle
+pouch
+stein
+wine glass
+sock
+cage
+fridge
+closet
+cauldron

@@ -1,0 +1,25 @@
+#machine
+lamp
+engine
+computer
+robot
+pulley
+wheel
+lever
+conveyer
+computer mouse
+monitor
+camera
+treadmill
+headset
+upload download machine
+PDA
+fax
+clock
+toaster
+jet
+train
+taxi
+crane
+disc
+hologram

@@ -1,0 +1,8 @@
+#storage
+bookshelf
+mine
+pit
+pocket dimension
+pool
+puzzle box
+skyscraper

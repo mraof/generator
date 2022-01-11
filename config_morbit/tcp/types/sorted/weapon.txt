@@ -1,0 +1,26 @@
+#weapon
+knife
+gun
+tank
+car
+key
+scissor
+shield
+trap
+lance
+sword
+axe
+bow
+slingshot
+wrench
+pillow
+sledgehammer
+oar
+flamethrower
+jackhammer
+shotgun
+water balloon
+nightstick
+whip
+baseball bat
+crowbar

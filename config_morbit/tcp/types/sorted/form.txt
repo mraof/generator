@@ -1,0 +1,27 @@
+#form
+round
+rhombus
+square
+cube
+pixel
+sphere
+cone
+bump
+tetrahedron
+cylinder
+squish
+tessellation
+paper
+fabric
+slime
+goldberg polyhedron
+polygon
+low poly
+prism
+circle
+wireframe
+tangram
+dodecahedron
+fractal
+thatch
+banner

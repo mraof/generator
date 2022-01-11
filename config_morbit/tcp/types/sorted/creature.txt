@@ -1,0 +1,26 @@
+#creature
+snake
+dad
+tadpole
+medic
+poison dart frog
+cat
+dog
+magician
+werewolf
+ghost
+zombie
+cerberus
+bird
+horror
+unicorn
+kangaroo
+skunk
+deer
+tiger
+mom
+snowman
+basking shark
+basilisk
+paladin
+tapir

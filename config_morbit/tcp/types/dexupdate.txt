@@ -1,0 +1,822 @@
+#abstract
+acceptance
+aesthetic
+anatomy
+bargain
+battle
+bedtime
+blessing
+boolean logic
+boon
+chaos
+cheer
+circle game
+collision
+comfort
+communication
+coziness
+cryptocurrency
+cuddle
+curse
+date
+deceit
+democracy
+destiny
+divination
+drama
+dream
+elation
+equation
+facade
+familial love
+fantasy (genre)
+festivity
+fight
+flounce
+giggle
+glitch
+guidance
+guts
+haecceity
+horror (genre)
+humor
+hypnotism
+imperfection
+induction
+infinity
+invention
+invocation
+irony
+legend
+loss
+love
+loving kindness
+lust
+lyric
+medicine
+melancholy
+memory
+method
+morriña
+nap
+negativity
+nostalgia
+nothing
+party
+pause
+petsite
+philosophy
+positivity
+possession
+power
+prayer
+pride
+promise
+prophecy
+puppy love
+purpose
+reanimation
+rebellion
+recovery
+rendition
+restraint
+revenge
+sadism
+sameness
+scrapmancy
+secret handshake
+self-love
+snowday
+solidarity
+sound
+space (abstract)
+support
+survival
+sweetness
+symphony
+taint
+thriller
+time
+tragedy
+transformation
+true power
+vulnerability
+warmth
+wish
+#body
+achluophobia
+addiction
+agoraphobia
+anatomic surrealism
+anthophobia
+anxiety
+aquaphobia
+arachnophobia
+atychiphobia
+bioluminescence
+blubber
+brain
+burn
+cannibalism
+cataplexy
+chakra
+circadian rhythmn
+claw
+corpse
+crow's feet
+cut
+dab
+decay
+depression
+dissection
+dissociation
+esophagus
+eyeball
+fear
+finger
+fossil
+freckle
+fur
+globster
+goosebump
+gore
+hair
+hanahaki disease
+hand
+heartache
+hemophobia
+heortophobia
+horn
+humor
+hypothermia
+implant
+knee
+migraine
+multiplicity
+mycophobia
+neck
+panic disorder
+patchwork
+phantom limb
+pharyngeal jaw
+phasmophobia
+pinkie toe
+plasma
+prosthetic
+pyromania
+rhabdophobia
+rot
+seashell
+skeleton
+slime
+tear
+teratoma
+thagomizer
+toenail
+tooth
+touch
+trypanophobia
+tumor
+voice
+whalefall
+wing
+#creature
+ahool
+ai
+alley cat
+alligator
+ammonite
+amphipod
+angel
+anglerfish
+antihero
+aquarius
+archer
+arctic ground squirrel
+aries
+author
+axolotl
+ball-jointed doll
+balloon animal
+band
+barreleye
+basilisk
+basking shark
+bastard
+bat
+bear
+beatfox
+beetle
+behemoth
+bird
+blue sea dragon
+boggart
+botley
+brood
+bull
+bumblebee
+cancer
+capricorn
+carousel horse
+cat
+cell
+centinel
+cerberus
+changeling
+chimaera fish
+chimera
+chinchilla
+chupacabra
+clown
+cocker spaniel
+comber
+construct
+cricket
+crow
+curator
+cyborg
+dad
+de'moneres
+deer
+devil (earth)
+devil (morbit)
+dik-dik
+dinosaur
+doctor
+dog
+doppelganger
+dragon
+dragonfly
+dullahan
+dunkleosteus
+dwarf
+eastern dragon
+electric eel
+electricity elemental
+fae
+fairy
+falcon
+fallow's construct
+familiar
+ferret
+fire elemental
+first mate
+fish
+florist
+fortune teller
+fox
+friend
+frog
+fruit eating bat
+gamer
+garbageman
+gargoyle
+gecko
+gemini
+ghost
+ghosthunter
+giant squid
+giant tcp
+gingerbread man
+girl
+gladiator
+goat
+goblin
+god
+gorgon
+graverobber
+great dane
+gulper eel
+hawk
+hedgehog
+hellbender
+hermit crab
+hero
+high god
+horror
+horse
+horseshoe crab
+hydra
+imaginary friend
+insect
+iron snail
+jackalope
+jellyfish
+jersey devil
+jester
+kaiju
+kamaitachi
+kangaroo
+karacel
+kelpie
+kitsune
+knight
+ladybug
+lake monster
+lan party
+lawyer
+leaf insect
+leo
+leviathan
+libra
+lich
+lion
+lizard
+lobster
+longwalker
+mad scientist
+mafia
+magical girl
+maine coon
+man
+mannequin
+marine
+martian
+masque
+mecha
+medium
+mimic octopus
+mimic
+miner
+mole crab
+mole
+monkey
+monster
+moth
+mothlie
+mothman
+mummy
+murder
+musical actor
+narrator
+necromancer
+negotiator
+nightcrawler
+ningen
+obj
+octopus
+omen
+onryo
+ophiuchus
+o cont.
+opossum
+osprey
+ouroboros
+ovibos
+owl
+ox
+paladin
+patchimus
+pet rock
+pet
+pig
+pirate captain
+pirate crew
+pisces
+piñata
+plesiosaur
+plush
+pockitt
+pooka
+port jackson shark
+proxy
+puppet
+queen
+rabbit
+ragamuffin
+rat
+rhino beetle
+robot
+rooster
+ropen
+royalty
+ruffneck
+saggitarius
+salamander
+scorpio
+sea monster
+sentinel
+seraph
+serpent
+shadow
+shark
+sheep
+shipmate
+shorthair cat
+siamese cat
+siren
+slime
+slugger
+smelve
+snake
+snowman
+songbird
+sphynx cat
+spider
+spriggan
+squid
+stag beetle
+stygiomedusa
+sweetbait
+synthesizer mascot
+t-rex
+taurus
+teddy bear
+the selected
+tiger shark
+tiger
+tin soldier
+triceratops
+trilobite
+triops
+tsuchinoko
+twin
+unicorn
+vampire squid
+vampire
+velvet worm
+virgo
+virus
+werewolf
+will o' wisp
+witch (morbit)
+witch (earth)
+wizard (morbit)
+wolf
+wooly bear
+worm monster
+worm-on-a-string
+zombie
+#food
+alfredo
+animal cracker
+antibiotic
+apple
+aspic
+banana split
+beans on toast
+blueberry
+bread
+bug lollipop
+burger
+candied apple
+candy cane
+candy corn
+candy heart
+candy
+cathedral cookie
+cheesecake
+chocolate chip cookie
+chocolate covered cookie
+chocolate covered pretzel
+citrus
+coffee
+cookie
+corn on the cob
+cotton candy
+cranberry sauce
+dulce de leche
+eggshake
+feast
+flan
+gelt
+glazed orange roll
+gravy
+grounds
+gummi worm
+hot chocolate
+ice cream cone
+jawbreaker
+jelly
+kibble
+kombucha
+latke
+lemon
+licorice
+lollipop
+macaroni and cheese
+marble soda
+marshmallow puff
+mashed potato
+matcha
+meat
+mint julep
+molded chocolate
+pancake
+peanut butter blossom
+peanut butter cookie
+peppermint bark
+pie
+pill
+pizza
+popcorn ball
+potion
+pretzel
+pumpkin
+raindrop cake
+raisinfruit
+roast beef sandwich
+roasted turkey
+rock candy
+root beer float
+saltwater taffy
+seashell chocolate
+slushie
+smoothie
+smore
+snickerdoodle
+soda
+spice
+stained glass cookie
+strawberry
+stuffing
+trash
+upside down cake
+vark
+water cake
+#form
+artist's mannequin
+asymmetry
+barcode
+beanbag
+birthday candle
+bisection
+blanket
+bone
+book
+bullet
+camouflage
+cartoon
+cave painting
+circle
+crumple
+cube
+door
+embroidery
+emoji
+flag
+fur
+graphic art
+hard hat
+heart
+hologram
+ink
+iron
+keychain
+kinetic sand
+lace
+lantern
+legwarmer
+light
+lubrication
+mask
+origami
+packing peanut
+paint
+pajamas
+paper
+pedestal
+perfume
+pillow
+pixel
+plastic
+playing card
+pop-up book
+porcelain
+quilt
+rave
+reusable ice cube
+rhombus
+round
+scarf
+sigil
+silk
+sleighbell
+slime
+slipper sock
+snowglobe
+sock
+sphere
+squish
+streamer
+surrealism
+sweater
+tetrahedron
+traffic cone
+treasure
+weighted blanket
+wire
+wireframe
+wood
+wool
+writing
+#machine
+bicycle
+car
+computer
+conveyer
+drone
+electrical shunt
+engine
+fairy light
+fan
+fax
+fidget spinner
+forcefield generator
+gumball machine
+lamp
+lighter
+mobile phone
+music box
+pda
+pulley
+spotlight
+submersible warship
+television
+train
+twinkle light
+vending machine
+virtual pet
+webcam
+wind-up toy
+#nature
+abyss
+acid rain
+acid
+aloe vera
+alphabet soup
+amber
+amethyst
+black hole
+blizzard
+bloodstone
+bonsai tree
+briar
+cactus
+cave
+cloud
+coal
+constellation
+coral tree
+cosmos
+crystal
+dandelion
+diamond
+driftwood
+dust
+emerald
+explosion
+fairy ring
+fern
+fly agaric
+flytrap
+forest
+garlic
+garnet
+geode
+god ray
+gravity
+heartsea flower
+holly
+horror crust
+horrorcap
+hurricane
+ice
+icicle
+inferior mirage
+jewel
+kelp
+komorebi
+lapis
+laurel
+lilac
+lily
+lilypad
+magma
+meteor
+moon
+moondust
+mountain
+mushroom
+nebula
+ocean
+opal
+ore
+pearl
+pitcher plant
+plasma
+portal
+prianthine
+pumpkin
+rafflesia
+rain
+rose
+ruby
+sapphire
+sardonyx
+scrapstorm
+smog
+snowflake
+space
+stalactite
+stalagmite
+stardust
+succulent
+sundew
+sunset
+sunstone
+supernova
+topaz
+tree
+tsunami
+ulexite
+vernal pool
+vine
+waterfall
+whirlpool
+wildfire
+willow tree
+#storage
+archive
+bank
+basket
+bookshelf
+bottle
+box
+brain (storage)
+cage
+cat tree
+cauldron
+clamshell container
+closet
+coffin
+collar
+dyson sphere
+envelope
+face bank
+fireplace
+fish tank
+fruit stand
+gachapon
+giftshop
+haunted house
+hive
+hospital
+jar
+kiddie pool
+library
+merchant
+museum
+piggy bank
+plastic bag
+secret
+skull
+sleeping bag
+spice jar
+stein
+store
+tent
+tzedakah box
+vessel
+#weapon
+armor
+axe
+baseball bat
+bear trap
+bow
+branding iron
+candelabra
+carabiner
+chain
+chainsaw
+circuit
+crowbar
+cutlass
+drill
+feather pen
+fisherman's lure
+fishing pole
+guillotine
+gun
+hook
+jackhammer
+key
+knife
+pastel
+pen
+pool noodle
+power armor
+railgun
+razorblade
+rope
+shield
+slingshot
+spinning rod
+sticky hand
+stilts
+sword
+tambourine
+trap
+wheel
+whip
+wrench
