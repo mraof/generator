@@ -1,6 +1,7 @@
 use rand::prelude::SliceRandom;
 use rand::rngs::StdRng;
 use rand::Rng;
+use std::cell::RefCell;
 use std::collections::BTreeMap;
 use std::collections::HashMap;
 use std::collections::HashSet;
@@ -10,9 +11,18 @@ pub type Generated = BTreeMap<String, String>;
 type GenRc = Rc<dyn Generator>;
 type Generators = HashMap<String, GenRc>;
 
+///Either `generate` or `generate_with` need to be implemented, default implementations for both use the other
 pub trait Generator {
-    fn generate(&self, rng: &mut StdRng, generators: &Generators) -> Generated;
-    fn generate_with(&self, rng: &mut StdRng, generators: &Generators, _existing: &Generated) -> Generated {
+    fn generate(&self, rng: &mut StdRng, generators: &Generators) -> Generated {
+        self.generate_with(rng, generators, &Generated::new())
+    }
+
+    fn generate_with(
+        &self,
+        rng: &mut StdRng,
+        generators: &Generators,
+        _existing: &Generated,
+    ) -> Generated {
         self.generate(rng, generators)
     }
 }
@@ -25,7 +35,12 @@ where
         (*self).generate(rng, generators)
     }
 
-    fn generate_with(&self, rng: &mut StdRng, generators: &Generators, existing: &Generated) -> Generated {
+    fn generate_with(
+        &self,
+        rng: &mut StdRng,
+        generators: &Generators,
+        existing: &Generated,
+    ) -> Generated {
         (*self).generate_with(rng, generators, existing)
     }
 }
@@ -38,7 +53,12 @@ where
         (**self).generate(rng, generators)
     }
 
-    fn generate_with(&self, rng: &mut StdRng, generators: &Generators, existing: &Generated) -> Generated {
+    fn generate_with(
+        &self,
+        rng: &mut StdRng,
+        generators: &Generators,
+        existing: &Generated,
+    ) -> Generated {
         (**self).generate_with(rng, generators, existing)
     }
 }
@@ -47,8 +67,15 @@ impl<G> Generator for Vec<G>
 where
     G: Generator,
 {
-    fn generate(&self, rng: &mut StdRng, generators: &Generators) -> Generated {
-        self.choose(rng).unwrap().generate(rng, generators)
+    fn generate_with(
+        &self,
+        rng: &mut StdRng,
+        generators: &Generators,
+        existing: &Generated,
+    ) -> Generated {
+        self.choose(rng)
+            .unwrap()
+            .generate_with(rng, generators, existing)
     }
 }
 
@@ -64,12 +91,40 @@ impl Generator for Generated {
     }
 }
 
+thread_local! {
+    static DEPTH: RefCell<u32> = RefCell::new(0);
+}
+
 impl Generator for String {
-    fn generate(&self, rng: &mut StdRng, generators: &Generators) -> Generated {
+    fn generate_with(
+        &self,
+        rng: &mut StdRng,
+        generators: &Generators,
+        existing: &Generated,
+    ) -> Generated {
         let string = self.to_string();
         if let Some(name) = string.strip_prefix("gen ") {
             if let Some(generator) = generators.get(name) {
-                generator.generate(rng, generators)
+                let mut current_depth = 0;
+                DEPTH.with(|depth| {
+                    *depth.borrow_mut() += 1;
+                    current_depth = *depth.borrow();
+                });
+                if current_depth > 1000 {
+                    let mut map = Generated::new();
+                    map.insert(
+                        "".to_string(),
+                        format!("Max recursion depth reached with generator {}", name),
+                    );
+                    return map;
+                }
+
+                let generated = generator.generate_with(rng, generators, existing);
+
+                DEPTH.with(|depth| {
+                    *depth.borrow_mut() += 1;
+                });
+                generated
             } else {
                 let mut map = Generated::new();
                 map.insert("".to_string(), format!("Missing generator: {}", name));
@@ -84,7 +139,12 @@ impl Generator for String {
 }
 
 impl Generator for str {
-    fn generate(&self, rng: &mut StdRng, generators: &Generators) -> Generated {
+    fn generate_with(
+        &self,
+        rng: &mut StdRng,
+        generators: &Generators,
+        existing: &Generated,
+    ) -> Generated {
         self.to_string().generate(rng, generators)
     }
 }
@@ -95,16 +155,16 @@ macro_rules! tostring_gen {
         $(
             impl Generator for $x {
                 fn generate(&self, _: &mut StdRng, _: &Generators) -> Generated {
-                        let mut map = Generated::new();
-                        map.insert("".to_string(), self.to_string());
-                        map
+                    let mut map = Generated::new();
+                    map.insert("".to_string(), self.to_string());
+                    map
                 }
             }
         )+
     }
 }
 
-tostring_gen!(i8, i16, i32, i64, u8, u16, u32, u64, f32, f64, bool);
+tostring_gen!(i8, i16, i32, i64, u8, u16, u32, u64, f32, f64, bool, char);
 
 pub struct SuperGenerator {
     generators: BTreeMap<String, GenRc>,
@@ -125,10 +185,15 @@ impl SuperGenerator {
 }
 
 impl Generator for SuperGenerator {
-    fn generate(&self, rng: &mut StdRng, generators: &Generators) -> Generated {
+    fn generate_with(
+        &self,
+        rng: &mut StdRng,
+        generators: &Generators,
+        existing: &Generated,
+    ) -> Generated {
         let mut map = Generated::new();
         for (name, generator) in &self.generators {
-            let generated = generator.generate(rng, generators);
+            let generated = generator.generate_with(rng, generators, existing);
             for (key, mut value) in generated {
                 let key = {
                     if key.is_empty() {
@@ -175,10 +240,15 @@ impl WeightedGenerator {
 }
 
 impl Generator for WeightedGenerator {
-    fn generate(&self, rng: &mut StdRng, generators: &Generators) -> Generated {
+    fn generate_with(
+        &self,
+        rng: &mut StdRng,
+        generators: &Generators,
+        existing: &Generated,
+    ) -> Generated {
         use rand::distributions::WeightedIndex;
         let i = rng.sample(WeightedIndex::new(&self.weights).unwrap());
-        self.generators[i].generate(rng, generators)
+        self.generators[i].generate_with(rng, generators, existing)
     }
 }
 
@@ -202,6 +272,7 @@ impl Generator for PostGenerator {
     fn generate(&self, rng: &mut StdRng, generators: &Generators) -> Generated {
         let mut map = Generated::new();
         for generator in &self.sequence {
+            println!("{:?}", map);
             let mut generated = generator.generate_with(rng, generators, &map);
             map.append(&mut generated);
         }
@@ -255,9 +326,13 @@ impl GeneratorHandler {
     }
 
     pub fn generate(&self, name: &str, rng: &mut StdRng) -> Generated {
+        self.generate_with(name, rng, &Generated::new())
+    }
+
+    pub fn generate_with(&self, name: &str, rng: &mut StdRng, existing: &Generated) -> Generated {
         let mut generated = Generated::new();
         if let Some(generator) = self.generators.get(name) {
-            generated.append(&mut generator.generate(rng, &self.generators));
+            generated.append(&mut generator.generate_with(rng, &self.generators, existing));
         } else {
             generated.insert("".to_string(), format!("Missing generator: {}", name));
         }
@@ -273,7 +348,7 @@ impl GeneratorHandler {
             } else {
                 for (prefix, name) in &to_generate {
                     let sub_generated = if let Some(generator) = self.generators.get(name) {
-                        generator.generate(rng, &self.generators)
+                        generator.generate_with(rng, &self.generators, existing)
                     } else {
                         let mut generated = Generated::new();
                         generated.insert("".to_string(), format!("Missing generator: {}", name));
@@ -304,16 +379,336 @@ pub trait Handler {
 }
 
 #[cfg(feature = "rhai")]
-pub mod rhai {
-    pub struct RhaiFunction {}
+pub mod rhai_config {
+    use crate::GenRc;
+    use crate::Generated;
+    use crate::Generator;
+    use crate::Generators;
+    use crate::Handler;
+    use crate::PostGenerator;
+    use crate::SuperGenerator;
+    use crate::WeightedGenerator;
+    use rand::rngs::StdRng;
+    use rand::Rng;
+    use rand::SeedableRng;
+    use rhai::def_package;
+    use rhai::packages::Package;
+    use rhai::packages::StandardPackage;
+    use rhai::plugin::combine_with_exported_module;
+    use rhai::plugin::export_module;
+    use rhai::Array;
+    use rhai::Dynamic;
+    use rhai::Engine;
+    use rhai::EvalAltResult;
+    use rhai::EvalContext;
+    use rhai::FnPtr;
+    use rhai::Map;
+    use rhai::Module;
+    use rhai::Position;
+    use rhai::Scope;
+    use rhai::AST;
+    use std::cell::RefCell;
+    use std::collections::HashMap;
+    use std::path::Path;
+    use std::rc::Rc;
+
+    #[export_module]
+    mod generator_module {
+        pub const COMMON: i64 = 100;
+        pub const UNCOMMON: i64 = 20;
+        pub const RARE: i64 = 10;
+        pub const VERY_RARE: i64 = 5;
+        pub const EXTREMELY_RARE: i64 = 5;
+    }
+
+    def_package! {
+        pub GeneratorPackage(module) {
+            StandardPackage::init(module);
+            module.set_custom_type::<Weighted>("Weighted");
+            module.set_custom_type::<Post>("Post");
+            module.set_custom_type::<RhaiRng>("Rng");
+            module.set_native_fn("Weighted", Weighted::new);
+            module.set_native_fn("Post", |array| Ok(Post::new(array)));
+            module.set_native_fn("random", RhaiRng::random);
+            combine_with_exported_module!(module, "generator_module", generator_module);
+        }
+    }
+
+    pub struct RhaiHandler {
+        path: String,
+        engine: Engine,
+    }
+
+    impl RhaiHandler {
+        pub fn new(path: &str) -> RhaiHandler {
+            let generator_package = GeneratorPackage::new();
+            let mut engine = Engine::new_raw();
+            engine.register_global_module(generator_package.as_shared_module());
+            engine.on_var(on_var);
+            RhaiHandler {
+                path: path.to_string(),
+                engine,
+            }
+        }
+    }
+
+    impl Handler for RhaiHandler {
+        fn dependencies(&self, filename: &str) -> Vec<String> {
+            let filename = format!("{}/generators/{}.rhai", self.path, filename);
+            if !Path::new(&filename).exists() {
+                return vec![];
+            }
+            let ast = self
+                .engine
+                .compile_file(filename.clone().into())
+                .unwrap_or_else(|e| panic!("{} failed to compile: {}", filename, e));
+            let vec = ast
+                .iter_literal_variables(false, true)
+                .find(|(name, _, _)| *name == "needs")
+                .map(|(_, _, value)| {
+                    if let Some(array) = value.clone().try_cast::<Array>() {
+                        array
+                            .into_iter()
+                            .filter_map(|v| v.try_cast::<String>())
+                            .collect()
+                    } else if let Some(string) = value.clone().try_cast::<String>() {
+                        vec![string]
+                    } else {
+                        vec![]
+                    }
+                })
+                .unwrap_or_else(|| Vec::new());
+            vec
+        }
+        fn load(&self, filename: &str) -> Option<HashMap<String, GenRc>> {
+            let filename = format!("{}/generators/{}.rhai", self.path, filename);
+            if !Path::new(&filename).exists() {
+                return None;
+            }
+            let mut scope = Scope::new();
+            scope.set_value("config", Map::new());
+            //TODO This is a temporary value why is this the rng being used always
+            scope.push_constant(
+                "rng",
+                RhaiRng(Rc::new(RefCell::new(StdRng::from_seed([0; 32])))),
+            );
+            let ast = self
+                .engine
+                .compile_file(filename.clone().into())
+                .unwrap_or_else(|e| panic!("{} failed to compile: {}", filename, e));
+            self.engine
+                .eval_ast_with_scope(&mut scope, &ast)
+                .unwrap_or_else(|e| panic!("{} failed to run: {}", filename, e));
+            let config = scope
+                .get_value::<Map>("config")
+                .expect("config variable is invalid");
+            let mut map = HashMap::new();
+            let generator_package = GeneratorPackage::new();
+            for (key, value) in config {
+                map.insert(
+                    key.to_string(),
+                    into_generator(&generator_package, value, &ast),
+                );
+            }
+            Some(map)
+        }
+    }
+
+    fn on_var(
+        name: &str,
+        _index: usize,
+        context: EvalContext,
+    ) -> Result<Option<Dynamic>, Box<EvalAltResult>> {
+        match name {
+            "rng" => context.scope().get_value("rng").map(Some).ok_or_else(|| {
+                EvalAltResult::ErrorVariableNotFound("rng".to_string(), Position::NONE).into()
+            }),
+            _ => Ok(None),
+        }
+    }
+
+    fn into_generator(package: &GeneratorPackage, value: Dynamic, ast: &AST) -> GenRc {
+        match value.type_name() {
+            "string" => Rc::new(value.cast::<String>()),
+            "u8" => Rc::new(value.cast::<u8>()),
+            "u16" => Rc::new(value.cast::<u16>()),
+            "u32" => Rc::new(value.cast::<u32>()),
+            "u64" => Rc::new(value.cast::<u64>()),
+            "i8" => Rc::new(value.cast::<i8>()),
+            "i16" => Rc::new(value.cast::<i16>()),
+            "i32" => Rc::new(value.cast::<i32>()),
+            "i64" => Rc::new(value.cast::<i64>()),
+            "f32" => Rc::new(value.cast::<f32>()),
+            "f64" => Rc::new(value.cast::<f64>()),
+            "bool" => Rc::new(value.cast::<bool>()),
+            "char" => Rc::new(value.cast::<char>()),
+            "()" => Rc::new(()),
+            "array" => {
+                let array = value.cast::<Array>();
+                let gen = array
+                    .into_iter()
+                    .map(|e| into_generator(package, e, ast))
+                    .collect::<Vec<GenRc>>();
+                Rc::new(gen)
+            }
+            "map" => {
+                let mut map = value.cast::<Map>();
+                let prefix = map
+                    .remove("prefix")
+                    .map(|v| v.as_bool().unwrap())
+                    .unwrap_or(false);
+                let mut gen = SuperGenerator::new(prefix);
+                for (key, value) in map {
+                    gen.add(&key.to_string(), into_generator(package, value, ast));
+                }
+                Rc::new(gen)
+            }
+            "generator::rhai_config::Post" => {
+                let post = value.cast::<Post>();
+                let mut gen = PostGenerator::new();
+                for value in post.0 {
+                    gen.add(into_generator(package, value, ast));
+                }
+                Rc::new(gen)
+            }
+            "generator::rhai_config::Weighted" => {
+                let weighted = value.cast::<Weighted>();
+                let mut gen = WeightedGenerator::new();
+                for (value, weight) in weighted.0 {
+                    gen.add(into_generator(package, value, ast), weight as u32)
+                }
+                Rc::new(gen)
+            }
+            "Fn" => {
+                let pointer = value.cast::<FnPtr>();
+                let curried: Vec<Dynamic> = pointer.curry().iter().cloned().collect();
+                let fn_name = pointer.fn_name();
+                let mut argument = false;
+                let functions = ast.clone_functions_only_filtered(|_, _, script, name, _params| {
+                    fn_name == name || (!name.starts_with("anon$") && script)
+                });
+                let params = functions.iter_functions().next().unwrap().params;
+                let diff = params.len() - curried.len();
+                if diff == 1 {
+                    argument = true
+                }
+                if diff > 1 {
+                    panic!("Too many parameters: {:?}", params);
+                }
+                let mut engine = Engine::new_raw();
+                engine.register_global_module(package.as_shared_module());
+                engine.on_var(on_var);
+                let gen = RhaiFunction {
+                    engine,
+                    name: fn_name.to_string(),
+                    ast: functions,
+                    curried,
+                    argument,
+                };
+                Rc::new(gen)
+            }
+            t => Rc::new(format!("Unsupported type {}", t)),
+        }
+    }
+
+    #[derive(Debug, Clone)]
+    struct Post(Array);
+
+    impl Post {
+        pub fn new(values: Array) -> Post {
+            Post(values)
+        }
+    }
+
+    #[derive(Debug, Clone)]
+    struct Weighted(Vec<(Dynamic, i64)>);
+
+    impl Weighted {
+        pub fn new(values: Array) -> Result<Weighted, Box<EvalAltResult>> {
+            let mut vec = Vec::with_capacity(values.len());
+            for (i, v) in values.into_iter().enumerate() {
+                if let Some(mut pair) = v.try_cast::<Array>() {
+                    if pair.len() != 2 {
+                        return Err(format!(
+                            "Element {} in weighted generator had a length of {}, should be a pair",
+                            i,
+                            pair.len()
+                        )
+                        .into());
+                    }
+                    if let Some(weight) = pair.remove(1).try_cast::<i64>() {
+                        vec.push((pair.remove(0), weight));
+                    } else {
+                        return Err(format!(
+                            "Element {} in weighted generator had a non integer weight",
+                            i
+                        )
+                        .into());
+                    }
+                } else {
+                    return Err(
+                        format!("Element {} in weighted generator was not an array", i).into(),
+                    );
+                }
+            }
+            Ok(Weighted(vec))
+        }
+    }
+
+    #[derive(Debug, Clone)]
+    struct RhaiRng(Rc<RefCell<StdRng>>);
+
+    impl RhaiRng {
+        pub fn random(&mut self, min: i64, max: i64) -> Result<i64, Box<EvalAltResult>> {
+            Ok(self.0.borrow_mut().gen_range(min..=max))
+        }
+    }
+
+    pub struct RhaiFunction {
+        engine: Engine,
+        name: String,
+        ast: AST,
+        curried: Vec<Dynamic>,
+        argument: bool,
+    }
+
+    impl Generator for RhaiFunction {
+        fn generate_with(
+            &self,
+            rng: &mut StdRng,
+            generators: &Generators,
+            existing: &Generated,
+        ) -> Generated {
+            let package = GeneratorPackage::new();
+            let mut scope = Scope::new();
+            //scope.push_constant("rng", );
+            let mut arguments = self.curried.clone();
+            if let Some(curried_rng) = arguments
+                .iter_mut()
+                .find(|a| a.type_name() == "generator::rhai_config::RhaiRng")
+            {
+                *curried_rng =
+                    Dynamic::from(RhaiRng(Rc::new(RefCell::new(StdRng::from_seed(rng.gen())))));
+            }
+            if self.argument {
+                println!("o: {:?}", existing);
+                arguments.push(existing.clone().into());
+            }
+            let returned = self
+                .engine
+                .call_fn(&mut scope, &self.ast, &self.name, arguments)
+                .expect("Failed to run rhai function");
+            into_generator(&package, returned, &self.ast).generate_with(rng, generators, existing)
+        }
+    }
 }
 
 #[cfg(feature = "rlua")]
 pub mod lua {
-    use crate::Generators;
-use crate::GenRc;
+    use crate::GenRc;
     use crate::Generated;
     use crate::Generator;
+    use crate::Generators;
     use crate::Handler;
     use crate::PostGenerator;
     use crate::SuperGenerator;
@@ -443,8 +838,7 @@ use crate::GenRc;
             }
             Value::Nil => Rc::new(()),
             Value::Table(table) => {
-                //Do I actually need the generators field anymore?
-                if table.contains_key("generators").unwrap() || table.get("post_gen").unwrap() {
+                if table.get("post_gen").unwrap() {
                     let mut generator = PostGenerator::new();
                     for value in table.sequence_values() {
                         generator.add(into_generator(state, lua, value.unwrap()));
@@ -553,7 +947,12 @@ use crate::GenRc;
             })
         }
 
-        fn generate_with(&self, rng: &mut StdRng, generators: &Generators, existing: &Generated) -> Generated {
+        fn generate_with(
+            &self,
+            rng: &mut StdRng,
+            generators: &Generators,
+            existing: &Generated,
+        ) -> Generated {
             self.lua.context(|lua| {
                 lua.globals().set("o", existing.clone()).unwrap();
             });
